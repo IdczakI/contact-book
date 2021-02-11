@@ -1,6 +1,7 @@
 package com.IdczakI.contactbook.io;
 
 import com.IdczakI.contactbook.model.Contact;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,10 +18,6 @@ public class CsvTool {
 
     public static List<Contact> getContactList() {
         return contactList;
-    }
-
-    public static void setContactList(List<Contact> contactList) {
-        CsvTool.contactList = contactList;
     }
 
     private static void createFile() throws IOException {
@@ -43,21 +40,19 @@ public class CsvTool {
 
     static private Contact readContact(String s) {
         String[] c = s.split(",");
-        return new Contact(c[0], c[1], c[2], c[3]);
+        return new Contact(c[0], c[1], c[2], c[3].trim());
     }
 
-    public static void writeFile() {
+    public static void writeFile(ObservableList<Contact> list) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             createFile();
-            for (Contact c : contactList) {
+            for (Contact c : list) {
                 writer.write(c.toCsv());
                 writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 }
