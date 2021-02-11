@@ -1,6 +1,6 @@
-package com.IdczakI.contact_book.io;
+package com.IdczakI.contactbook.io;
 
-import com.IdczakI.contact_book.model.Contact;
+import com.IdczakI.contactbook.model.Contact;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CsvTool {
 
-    private final static String FILE_NAME = "src/main/resources/css/contact_book.csv";
+    private final static String FILE_NAME = "src/main/resources/csv/contact_book.csv";
 
     private final static File file = new File(FILE_NAME);
 

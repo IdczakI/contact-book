@@ -1,4 +1,4 @@
-package com.IdczakI.contact_book.model;
+package com.IdczakI.contactbook.model;
 
 public class Contact {
 
@@ -11,6 +11,22 @@ public class Contact {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -33,4 +49,5 @@ public class Contact {
     public String toCsv(){
        return name + "," + phone + "," + email + "," + description;
     }
- }
+
+}
