@@ -1,0 +1,14 @@
+.table-view,
+.button,
+.label,
+.text-field,
+.text-area {
+    -fx-font-family: "Comic Sans MS";
+}
+
+.button:hover,
+.menu:hover,
+.menu-item{
+    -fx-background-color: red;
+    -fx-cursor: hand;
+}

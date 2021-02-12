@@ -78,6 +78,7 @@ public class MainController {
         deleteButton.setOnAction(this::deleteContact);
         useContactButton.setOnAction(this::useContact);
         exitMenuItem.setOnAction(event -> Platform.exit());
+        aboutMenuItem.setOnAction(event -> showAboutPane());
     }
 
     private void loadContacts() {
@@ -147,6 +148,10 @@ public class MainController {
 
     private void showUseContactPane() {
         showContactPane("/fxml/useContactPane.fxml", "Use Contact");
+    }
+
+    private void showAboutPane() {
+        showContactPane("/fxml/aboutPane.fxml", "Contact Book - about");
     }
 
     private void showContactPane(String resource, String title) {
