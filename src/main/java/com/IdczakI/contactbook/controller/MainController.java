@@ -3,6 +3,7 @@ package com.IdczakI.contactbook.controller;
 import com.IdczakI.contactbook.io.CsvTool;
 import com.IdczakI.contactbook.model.Contact;
 import com.IdczakI.contactbook.model.ContactBook;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +24,11 @@ public class MainController {
     static ObservableList<Contact> list = FXCollections.observableArrayList();
     ContactBook book = new ContactBook();
     static Contact tmpContact = new Contact("", "", "", "");
-    static Contact newContact = new Contact("", "", "", "");
+    static int tableIndex;
+
+    public static ObservableList<Contact> getList() {
+        return list;
+    }
 
     @FXML
     private MenuItem exitMenuItem;
@@ -67,35 +72,64 @@ public class MainController {
     public void initialize() {
         loadContacts();
         searchTextField.setOnKeyTyped(this::searchingOperation);
-        createButton.setOnAction(event -> showAddContactPane());
+        createButton.setOnAction(this::addContact);
         copyButton.setOnAction(this::copyContact);
         editButton.setOnAction(this::editContact);
         deleteButton.setOnAction(this::deleteContact);
-        useContactButton.setOnAction(event -> {
-            list.remove(contactTableView.getSelectionModel().getSelectedIndex());
-            list.add(newContact);
-        });
+        useContactButton.setOnAction(this::useContact);
+        exitMenuItem.setOnAction(event -> Platform.exit());
     }
 
-    private void deleteContact(ActionEvent event) {
+    private void loadContacts() {
+        CsvTool.readFile();
+        list.addAll(CsvTool.getContactList());
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        phoneTableColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        emailTableColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        contactTableView.setItems(list);
+    }
+
+    private void searchingOperation(KeyEvent keyEvent) {
+        List<Contact> tmp = book.search(list, searchTextField.getText());
+        ObservableList<Contact> searchList = FXCollections.observableArrayList(tmp);
+        contactTableView.setItems(searchList);
+    }
+
+    private void addContact(ActionEvent event) {
+        contactTableView.setItems(list);
+        showAddContactPane();
+    }
+
+    private void copyContact(ActionEvent event) {
+        contactTableView.setItems(list);
         if (!contactTableView.getSelectionModel().isEmpty()) {
-            list.remove(contactTableView.getSelectionModel().getSelectedIndex());
-            CsvTool.writeFile(list);
+            Contact contact = contactTableView.getItems().get(contactTableView.getSelectionModel().getSelectedIndex());
+            list.add(contact);
         }
     }
 
     private void editContact(ActionEvent event) {
+        contactTableView.setItems(list);
         if (!contactTableView.getSelectionModel().isEmpty()) {
-            tmpContact = contactTableView.getItems().get(contactTableView.getSelectionModel().getSelectedIndex());
+            tableIndex = contactTableView.getSelectionModel().getSelectedIndex();
+            tmpContact = contactTableView.getItems().get(tableIndex);
             showEditContactPane();
         }
     }
 
-    private void copyContact(ActionEvent event) {
+    private void deleteContact(ActionEvent event) {
+        contactTableView.setItems(list);
         if (!contactTableView.getSelectionModel().isEmpty()) {
-            Contact contact = contactTableView.getItems().get(contactTableView.getSelectionModel().getSelectedIndex());
-            list.add(contact);
-            CsvTool.writeFile(list);
+            showDeleteContactPane();
+            tableIndex = contactTableView.getSelectionModel().getSelectedIndex();
+        }
+    }
+
+    private void useContact(ActionEvent event) {
+        contactTableView.setItems(list);
+        if (!contactTableView.getSelectionModel().isEmpty()) {
+            showUseContactPane();
         }
     }
 
@@ -107,6 +141,14 @@ public class MainController {
         showContactPane("/fxml/editContactPane.fxml", "Edit Contact");
     }
 
+    private void showDeleteContactPane() {
+        showContactPane("/fxml/deleteContactPane.fxml", "Delete Contact");
+    }
+
+    private void showUseContactPane() {
+        showContactPane("/fxml/useContactPane.fxml", "Use Contact");
+    }
+
     private void showContactPane(String resource, String title) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource(resource));
@@ -115,24 +157,8 @@ public class MainController {
             stage.setTitle(title);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
-    }
-
-    private void searchingOperation(KeyEvent keyEvent) {
-        List<Contact> tmp = book.search(list, searchTextField.getText());
-        ObservableList<Contact> searchList = FXCollections.observableArrayList(tmp);
-        contactTableView.setItems(searchList);
-    }
-
-    private void loadContacts() {
-        CsvTool.readFile();
-        list.addAll(CsvTool.getContactList());
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        phoneTableColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        emailTableColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        contactTableView.setItems(list);
     }
 }

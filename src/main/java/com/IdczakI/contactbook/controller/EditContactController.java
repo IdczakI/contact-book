@@ -1,5 +1,6 @@
 package com.IdczakI.contactbook.controller;
 
+import com.IdczakI.contactbook.io.CsvTool;
 import com.IdczakI.contactbook.model.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,8 +31,9 @@ public class EditContactController extends MainController {
     }
 
     private void editContact(ActionEvent event) {
-        newContact = new Contact(nameTextField.getText(), phoneTextField.getText(),
+        Contact newContact = new Contact(nameTextField.getText(), phoneTextField.getText(),
                 emailTextField.getText(), descriptionTextField.getText());
+        list.set(tableIndex, newContact);
         Stage stage = (Stage) editContactButton.getScene().getWindow();
         stage.close();
 

@@ -10,32 +10,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.IdczakI.contactbook.controller.MainController">
+<VBox xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.IdczakI.contactbook.controller.MainController">
     <MenuBar>
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
+            <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit"/>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
+            <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About"/>
         </Menu>
     </MenuBar>
     <TableView fx:id="contactTableView" prefHeight="400.0" prefWidth="500.0" VBox.vgrow="ALWAYS">
         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
         </columnResizePolicy>
         <columns>
-            <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="phoneTableColumn" prefWidth="75.0" text="Phone Number" />
-            <TableColumn fx:id="emailTableColumn" prefWidth="75.0" text="Email" />
-            <TableColumn fx:id="descriptionTableColumn" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="Name"/>
+            <TableColumn fx:id="phoneTableColumn" prefWidth="75.0" text="Phone Number"/>
+            <TableColumn fx:id="emailTableColumn" prefWidth="75.0" text="Email"/>
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="75.0" text="Description"/>
         </columns>
     </TableView>
-    <TextField fx:id="searchTextField" VBox.vgrow="ALWAYS" />
+    <TextField fx:id="searchTextField" VBox.vgrow="ALWAYS"/>
     <HBox VBox.vgrow="NEVER">
-        <Button fx:id="useContactButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Use Contact" HBox.hgrow="ALWAYS" />
-        <Button fx:id="createButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Create New" HBox.hgrow="ALWAYS" />
-        <Button fx:id="copyButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Copy" HBox.hgrow="ALWAYS" />
-        <Button fx:id="editButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Edit" HBox.hgrow="ALWAYS" />
-        <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete" HBox.hgrow="ALWAYS" />
+        <Button fx:id="useContactButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Use Contact"
+                HBox.hgrow="ALWAYS"/>
+        <Button fx:id="createButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Create New"
+                HBox.hgrow="ALWAYS"/>
+        <Button fx:id="copyButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Copy"
+                HBox.hgrow="ALWAYS"/>
+        <Button fx:id="editButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Edit"
+                HBox.hgrow="ALWAYS"/>
+        <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete"
+                HBox.hgrow="ALWAYS"/>
     </HBox>
 </VBox>

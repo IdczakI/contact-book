@@ -1,6 +1,5 @@
 package com.IdczakI.contactbook.controller;
 
-import com.IdczakI.contactbook.io.CsvTool;
 import com.IdczakI.contactbook.model.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

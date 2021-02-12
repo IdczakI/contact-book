@@ -33,7 +33,8 @@ public class CsvTool {
             contactList = reader.lines()
                     .map(CsvTool::readContact)
                     .collect(Collectors.toList());
-        } catch (IOException e) {
+            reader.close();
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -50,7 +51,7 @@ public class CsvTool {
                 writer.write(c.toCsv());
                 writer.newLine();
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
     }

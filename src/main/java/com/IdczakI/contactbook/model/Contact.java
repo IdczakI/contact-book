@@ -1,7 +1,5 @@
 package com.IdczakI.contactbook.model;
 
-import java.util.Objects;
-
 public class Contact {
 
     private String name;
@@ -36,17 +34,4 @@ public class Contact {
         return name + "," + phone + "," + email + "," + description + " ";
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Contact)) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(name, contact.name) && Objects.equals(phone, contact.phone)
-                && Objects.equals(email, contact.email) && Objects.equals(description, contact.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, phone, email, description);
-    }
 }
