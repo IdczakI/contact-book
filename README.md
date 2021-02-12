@@ -11,7 +11,7 @@ The "Use Contact" option is unfortunately not available yet.
 
 The application was created to increase the author's 
 programming skills. Any comments are welcome.
-##Technologies used
+## Technologies used
 * Java
 * JavaFX
 * Apache Maven
