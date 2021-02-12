@@ -11,7 +11,7 @@ public class AboutController {
     private final static String ABOUT_TEXT = """
             This is the Contact Book application.
             Here you can add, copy, edit, search, and delete contacts.
-            All actions are handling with buttons except searching - 
+            All actions are handled with buttons except search - 
             in this case you just need to enter the string in the text field.
             
             The data is loaded and saved in the csv file.

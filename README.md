@@ -2,7 +2,7 @@
 This is the simple contact storage application with 
 the ability to add, edit, copy, search and delete contacts.
 
-All actions are handling with buttons except searching - in
+All actions are handled with buttons except search - in
 this case you just need to enter the string in the text field.
 
 The data is loaded and saved in the csv file.
